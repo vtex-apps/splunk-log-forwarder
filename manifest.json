@@ -1,0 +1,63 @@
+{
+  "name": "splunk-log-forwarder",
+  "vendor": "vtex",
+  "version": "0.0.1",
+  "title": "Datadog Log Forwarder",
+  "description": "Consumes logs from VTEX IO and forwards to Splunk",
+  "categories": [],
+  "dependencies": {},
+  "builders": {
+    "node": "6.x",
+    "docs": "0.x"
+  },
+  "settingsSchema": {
+    "title": "VTEX Splunk Cloud Log Forwarder",
+    "type": "object",
+    "properties": {
+      "host": {
+        "title": "Splunk Cloud Host",
+        "description": "Splunk Cloud Hostname here",
+        "type": "string"
+      },
+      "port": {
+        "title": "Splunk Cloud Collector Port",
+        "description": "Splunk Cloud HTTP Event Collector port",
+        "type": "string"
+      },
+      "token": {
+        "title": "Splunk Collector Token",
+        "description": "Splunk HTTP Event Collector Token here",
+        "type": "string"
+      }
+    }
+  },
+  "scripts": {
+    "prereleasy": "bash lint.sh"
+  },
+  "credentialType": "absolute",
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "*.splunkcloud.com",
+        "path": "/services/collector/event"
+      }
+    },
+    {
+      "name": "read_logs_stream",
+      "description": "Allows reading logs from stream",
+      "statements": [
+        {
+          "effect": "allow",
+          "actions": [
+            "get"
+          ],
+          "resources": [
+            "vrn:skidder:{{region}}:{{account}}:{{workspace}}:/logs/stream/*"
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
+}
