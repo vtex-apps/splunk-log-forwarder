@@ -57,3 +57,6 @@ jsconfig.json
 .eslintrc
 
 **/yarn-error.log
+
+dist
+build
