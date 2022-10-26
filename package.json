@@ -7,7 +7,6 @@
     "dev": "tsc && NODE_ENV=development nodemon dist/index.js",
     "watch": "NODE_ENV=development nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' src/index.ts",
     "debug": "tsc && NODE_ENV=development nodemon --inspect dist/index.js",
-    "test": "NODE_ENV=test jest --no-cache",
     "lint": "eslint --fix src && prettier --write 'src/**/*.ts'"
   },
   "dependencies": {
