@@ -80,6 +80,30 @@ Logs have different log levels, that could be defined by the application develop
 
 ## Implementation details
 
+This example is implemented using [Koa Web Framework](https://koajs.com/).
+
+There are 3 Koa middlewares registered at Koa server, those middleware define the basic pipeline for the application `[setup, fetchAppToken, logsForwarder]`. 
+
+1 - `setup` Reads required envvars to create a context that will be used by the application. Env vars could be defined by creating a `.env` file at the src directory. 
+    Example:
+    ```.env
+        VTEX_ACCOUNT=<account>
+        VTEX_WORKSPACE=<workspace>
+        VTEX_APP_KEY=<app-key>
+        VTEX_APP_TOKEN=<app-token>
+        SPLUNK_HOST=<splunk-http-event-host>
+        SPLUNK_PORT=<splunk-http-event-port>
+        SPLUNK_TOKEN=<splunk-token>
+    ```
+2 - `fetchAppToken` Makes the authentication request and adds the auth token to the context.
+
+3 - `logsForwarder` Reads the logs from VTEX IO Logs Stream and forwards them to Splunk
+
+
+Basic development usage: 
+
+1 - `yarn watch` This will start the server at localhost
+2 - `curl -X POST http://localhost:8080/forwarder/start`. This will the pipeline described above.
 
 ## Scripts
 
