@@ -3,20 +3,23 @@ import axios from 'axios'
 
 export const fetchAppToken = async (ctx: Context, next: Next) => {
   const {
-    vtex: { appKey, appToken },
+    vtex: { account, appKey, appToken },
   } = ctx
 
-  const response = await axios.get(
-    `https://vtexid.vtex.com.br/api/vtexid/pub/authenticate/default`,
+  const response = await axios.post(
+    `https://api.vtexcommercestable.com.br/api/vtexid/apptoken/login`,
+    {
+      appkey: appKey,
+      apptoken: appToken
+    },
     {
       params: {
-        user: appKey,
-        pass: appToken,
+        an: account
       },
     }
   )
 
-  ctx.vtex.VtexIdClientAutCookie = response.data.authCookie.Value
+  ctx.vtex.VtexIdClientAutCookie = response.data.token
 
   await next()
 }

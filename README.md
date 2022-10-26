@@ -30,24 +30,24 @@ Application Key and Token generated previously, can now be used to authenticate 
 
 To exchange authenticate your client the following API could be used.
 
-curl https://vtexid.vtex.com.br/api/vtexid/pub/authenticate/default?user={{key}}&pass={{token}}
+```
+curl --location --request POST 'https://api.vtexcommercestable.com.br/api/vtexid/apptoken/login?an={{account}}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "appkey": "<appKey>",
+    "apptoken": "<appToken>"
+}'
+```
 
-This call will return a similar payload.
+This call will return a similar payload. Where the token value is the one needed to for this API to work.
 
 ```
 {
     "authStatus": "Success",
-    "authCookie": {
-        "Name": "VtexIdclientAutCookie",
-        "Value": "<token>"
-    },
-    "accountAuthCookie": null,
-    "expiresIn": 86399,
-    "userId": "..."
+    "token": <token>
+    "expires": 1666838733
 }
 ```
-
-The token inside `authCookie.Value` is the one needed to for this API to work.
 
 ### Requests to the Logs stream
 

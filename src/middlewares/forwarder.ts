@@ -33,7 +33,7 @@ function startEventSource(ctx: Context) {
   const es = new LogSource(account, workspace, {
     headers: {
       Authorization: VtexIdClientAutCookie,
-      'User-Agent': `splunk-forwarder-5#${host}-${port}`,
+      'User-Agent': `splunk-forwarder#${host}-${port}`,
     },
   })
 
