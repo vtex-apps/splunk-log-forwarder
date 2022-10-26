@@ -1,4 +1,4 @@
-# Node Service Starter for VTEX IO apps
+# Logs Stream Client Example
 
 Basic implementation that consumed VTEX IO Logs Stream to foward for Splunk.
 
