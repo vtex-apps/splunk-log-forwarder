@@ -18,13 +18,13 @@ Authorization is needed, for a client to call Logs Stream API
 
 First thing required is to have Application Credentials that allow logs to be consumed from stream.
 
-To make this, go to your VTEX Account admin, at the Roles panel and create a new Role for Logs consumption. This role should have `Application Logs Stream` as product added, with `Read logs stream` permision.
+To make this, go to your VTEX Account admin, at the Roles panel and create a new Role for Logs consumption. This role should have `Application Logs Stream` as product added, with `Read logs stream` permission.
 
-![new role panel](https://github.com/vtex-apps/splunk-log-forwarder/blob/main/docs/VTEX%20new%20roles%20panel.png?raw=true New role panel)
+![new role panel](https://github.com/vtex-apps/splunk-log-forwarder/blob/main/docs/VTEX%20new%20roles%20panel.png?raw=true "New role panel")
 
 With the new role created, an application key could be created using the given role as following.
 
-![add app key](https://github.com/vtex-apps/splunk-log-forwarder/blob/main/docs/VTEX%20add%20aplication%20key%20panel.png?raw=true Add Applicaton Key)
+![add app key](https://github.com/vtex-apps/splunk-log-forwarder/blob/main/docs/VTEX%20add%20aplication%20key%20panel.png?raw=true "Add Applicaton Key")
 
 Application Key and Token generated previously, can now be used to authenticate your client, so requests to the Logs Stream API is authorized.
 
