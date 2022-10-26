@@ -54,13 +54,16 @@ The token inside `authCookie.Value` is the one needed to for this API to work.
 
 With the proper Auth token set `TOKEN=<token>`. API calls could be made as following.
 
-curl -v http://infra.io.vtex.com/skidder/v1/{{account}}/{{workspace}}/logs/stream -H "Authorization: $TOKEN" -H 'User-Agent: test' -H 'Accept: text/event-stream'
+```
+curl http://infra.io.vtex.com/skidder/v1/{{account}}/{{workspace}}/logs/stream -H "Authorization: $TOKEN" -H 'User-Agent: test' -H 'Accept: text/event-stream'
+```
 
 Returing data example
 
+```
 event:message
 data:{"level":"warn","app":"<app-vendor>.<app-name>@<app-version>","account":"<account>","workspace":"<workspace>","production":true,"data":{"signal":"SIGTERM"},"operationId":"","requestId":""}
-
+```
 
 Server will keep sending those events to the client as long as logs are available at the stream.
 If connection is aborted by the client, the server will stop sending the data. 
@@ -73,7 +76,7 @@ There are two kinds of events at the Logs stream. `Logs` and `Metrics`.
 
 Metric events are identified by the attribute `type: metric/status`, where logs have no type assigned to them.
 
-Logs have different log levels, that could be defined by the application developer, as described (here)[https://developers.vtex.com/vtex-developer-docs/docs/vtex-io-documentation-managing-application-logs#implementing-the-vtex-io-logging-service].
+Logs have different log levels, that could be defined by the application developer, as described [here](https://developers.vtex.com/vtex-developer-docs/docs/vtex-io-documentation-managing-application-logs#implementing-the-vtex-io-logging-service).
 
 ## Implementation details
 
