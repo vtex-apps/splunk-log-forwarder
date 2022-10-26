@@ -28,7 +28,7 @@ With the new role created, an application key could be created using the given r
 
 Application Key and Token generated previously, can now be used to authenticate your client, so requests to the Logs Stream API is authorized.
 
-To exchange authenticate your client the following API could be used.
+To authenticate your client the following API could be used.
 
 ```
 curl --location --request POST 'https://api.vtexcommercestable.com.br/api/vtexid/apptoken/login?an={{account}}' \
