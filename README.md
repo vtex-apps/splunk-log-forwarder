@@ -6,7 +6,7 @@ Basic implementation that consumed VTEX IO Logs Stream to foward for Splunk.
 
 ![Overview](https://github.com/vtex-apps/splunk-log-forwarder/blob/main/docs/architecture-overview.png?raw=true "High level architecture")
 
-VTEX IO Logs API is implemented using (Server-sent events)[https://en.wikipedia.org/wiki/Server-sent_events]. It enables servers to stream messages to clients through HTTP.
+VTEX IO Logs API is implemented using [Server-sent events](https://en.wikipedia.org/wiki/Server-sent_events). It enables servers to stream messages to clients through HTTP.
 
 This is a simple client implementation that receives VTEX Logs in a stream through server-sent events, bull them, to send to a Splunk HTTP Event Collector.
 
