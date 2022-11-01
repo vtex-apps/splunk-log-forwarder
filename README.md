@@ -10,6 +10,33 @@ VTEX IO Logs API is implemented using [Server-sent events](https://en.wikipedia.
 
 This is a simple client implementation that receives VTEX Logs in a stream through server-sent events, bull them, to send to a Splunk HTTP Event Collector.
 
+## Implementation details
+
+This example is implemented using [Koa Web Framework](https://koajs.com/).
+
+There are 3 Koa middlewares registered at Koa server, those middleware define the basic pipeline for the application `[setup, fetchAppToken, logsForwarder]`. 
+
+1. `setup` Reads required envvars to create a context that will be used by the application. Env vars could be defined by creating a `.env` file at the src directory. 
+    
+    -- Example:
+    ```.env
+        VTEX_ACCOUNT=<account>
+        VTEX_WORKSPACE=<workspace>
+        VTEX_APP_KEY=<app-key>
+        VTEX_APP_TOKEN=<app-token>
+        SPLUNK_HOST=<splunk-http-event-host>
+        SPLUNK_PORT=<splunk-http-event-port>
+        SPLUNK_TOKEN=<splunk-token>
+    ```
+2. `fetchAppToken` Makes the authentication request and adds the auth token to the context.
+
+3. `logsForwarder` Reads the logs from VTEX IO Logs Stream and forwards them to Splunk
+
+#### Usage: 
+
+1. `yarn watch` This will start the server at localhost
+2. `curl -X POST http://localhost:8080/forwarder/start`. This will start the pipeline described above.
+
 ## VTEX Logs Stream API
 
 ### Authorization
@@ -77,34 +104,6 @@ There are two kinds of events at the Logs stream. `Logs` and `Metrics`.
 Metric events are identified by the attribute `type: metric/status`, where logs have no type assigned to them.
 
 Logs have different log levels, that could be defined by the application developer, as described [here](https://developers.vtex.com/vtex-developer-docs/docs/vtex-io-documentation-managing-application-logs#implementing-the-vtex-io-logging-service).
-
-## Implementation details
-
-This example is implemented using [Koa Web Framework](https://koajs.com/).
-
-There are 3 Koa middlewares registered at Koa server, those middleware define the basic pipeline for the application `[setup, fetchAppToken, logsForwarder]`. 
-
-1. `setup` Reads required envvars to create a context that will be used by the application. Env vars could be defined by creating a `.env` file at the src directory. 
-    
-    -- Example:
-    ```.env
-        VTEX_ACCOUNT=<account>
-        VTEX_WORKSPACE=<workspace>
-        VTEX_APP_KEY=<app-key>
-        VTEX_APP_TOKEN=<app-token>
-        SPLUNK_HOST=<splunk-http-event-host>
-        SPLUNK_PORT=<splunk-http-event-port>
-        SPLUNK_TOKEN=<splunk-token>
-    ```
-2. `fetchAppToken` Makes the authentication request and adds the auth token to the context.
-
-3. `logsForwarder` Reads the logs from VTEX IO Logs Stream and forwards them to Splunk
-
-
-#### Basic development usage: 
-
-1. `yarn watch` This will start the server at localhost
-2. `curl -X POST http://localhost:8080/forwarder/start`. This will start the pipeline described above.
 
 ## Scripts
 
