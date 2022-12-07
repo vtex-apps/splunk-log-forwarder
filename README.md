@@ -8,7 +8,7 @@ Basic implementation that consumed VTEX IO Logs Stream to foward for Splunk.
 
 VTEX IO Logs API is implemented using [Server-sent events](https://en.wikipedia.org/wiki/Server-sent_events). It enables servers to stream messages to clients through HTTP.
 
-This is a simple client implementation that receives VTEX Logs in a stream through server-sent events, bull them, to send to a Splunk HTTP Event Collector.
+This is a simple client implementation that receives VTEX Logs in a stream through server-sent events, bulk them, to send to a Splunk HTTP Event Collector.
 
 ## Implementation details
 
@@ -96,12 +96,6 @@ Server will keep sending those events to the client as long as logs are availabl
 If connection is aborted by the client, the server will stop sending the data. 
 
 Clients could resume the stream at the point they stopped consuming. The server keep this state reading the `User-Agent` header. User-Agent could be changed to get all events from the begin.
-
-## Event types
-
-There are two kinds of events at the Logs stream. `Logs` and `Metrics`.
-
-Metric events are identified by the attribute `type: metric/status`, where logs have no type assigned to them.
 
 Logs have different log levels, that could be defined by the application developer, as described [here](https://developers.vtex.com/vtex-developer-docs/docs/vtex-io-documentation-managing-application-logs#implementing-the-vtex-io-logging-service).
 
